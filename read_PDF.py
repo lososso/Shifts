@@ -1,12 +1,19 @@
-import PyPDF2
+# Reading an excel file using Python
+import xlrd
 
+# Give the location of the file
+loc = ("Operation2020-convertido.xlsx")
 
-# Object creation
+# To open Workbook
+wb = xlrd.open_workbook(loc)
+sheet = wb.sheet_by_index(3)
+numRows = sheet.nrows
+numColumns = sheet.ncols
+print (numColumns, numRows)
 
-pdfFileObj = open('Operation2020.pdf','rb')
-pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
-pageObj = pdfReader.getPage(0)
-Raw_Calendar = (pageObj.extractText())
-Raw_Calendar = str(Raw_Calendar)
-print (Raw_Calendar.split('\n'))
+# For row 0 and column 0
+for i in range(0,numColumns):
+    A = sheet.cell_value(0, i)
+    month = str(A.split('\n'))
+    print month
 
