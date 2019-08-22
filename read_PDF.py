@@ -2,9 +2,8 @@
 import xlrd
 
 
-def main():
+def main(loc):
     # Give the location of the file
-    loc = "Operation2020-convertido.xlsx"
     [numrows,numcolumns,sheet] = readExcel(loc)
     year_dict = getMonths(sheet,numcolumns)
     year_list = ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
@@ -13,6 +12,7 @@ def main():
     for months in year_list:
         shifts = getShifts(year_dict,months,numrows,sheet)
         year_dict[months] = shifts
+    print year_dict
     return year_dict
 
 
@@ -73,6 +73,7 @@ def getMonths(sheet, numcolumns):
                 break
             Year[month] = i
     return Year
+
 
 def getShifts(year_dict,month,numrows,sheet):
     index = year_dict[month]
