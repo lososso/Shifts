@@ -22,10 +22,11 @@ def setButtonColor(button,shift_type):
         button.setStyleSheet("background-color: orange")
     if shift_type == 'M':
         button.setStyleSheet("background-color: green")
-    if shift_type == 'W':
+    if shift_type == 'W' or shift_type == 'PSS' or shift_type == 'SPR':
         button.setStyleSheet("background-color: cyan")
     if shift_type == 'OFF':
         button.setStyleSheet("background-color: yellow")
+
 
 def create_gui(year_list,calendar_dict):
     a = QApplication(sys.argv)
