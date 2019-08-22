@@ -21,7 +21,7 @@ def decodeUnicode(data):
         data = 'BL'
     if data == u'M':
         data = 'M'
-    if data == u'W' or data == u'  SPR ':
+    if data == u'W' or data == u'  SPR ' or data == u'SPR' or data == u'PSS':
         data = 'W'
     if data == u'Off':
         data = 'OFF'
