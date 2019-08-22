@@ -1,20 +1,16 @@
 import read_PDF as RPDF
 import sys
-from PyQt4.QtGui import *
+from PyQt5.QtWidgets import QApplication, QLabel, QGridLayout, QWidget, QGroupBox, QPushButton, QVBoxLayout
 
 
 def main():
     loc2020 = "Operation2020-convertido.xlsx"
     loc2019 = "Operation2019-convertido.xlsx"
     calendar_dict = RPDF.main(loc2019)
-
-    #print calendar_dict
     year_list = ('January', 'February', 'March',
                  'April', 'May', 'June',
                  'July', 'August', 'September',
                  'October', 'November','December')
-
-
     create_gui(year_list,calendar_dict)
 
 def setButtonColor(button,shift_type):
@@ -28,17 +24,17 @@ def setButtonColor(button,shift_type):
         button.setStyleSheet("background-color: yellow")
 
 
-def create_gui(year_list,calendar_dict):
-    a = QApplication(sys.argv)
+def create_gui( year_list,calendar_dict):
+    app = QApplication([])
     # The QWidget widget is the base class of all user interface objects in PyQt4.
     w = QWidget()
     main_layout = QGridLayout()
     w.setLayout(main_layout)
     # Set window title
     w.setWindowTitle("Shift Gui V0.1")
-    for index, element in enumerate(year_list):
+    for (index), element in enumerate(year_list):
         group = QGroupBox(element)
-        group_layout = QGridLayout()
+        group_layout = QVBoxLayout()
         group.setLayout(group_layout)
         main_layout.addWidget(group, 0, (index + 1))
         month = calendar_dict[element]
@@ -58,17 +54,20 @@ def create_gui(year_list,calendar_dict):
             setButtonColor(evening_label,evening)
             night_label = QPushButton(night)
             setButtonColor(night_label,night)
-            group_layout.addLayout(shift_layout,day,index + 1)
+            print (day, index)
+            value = index + 1
+            group_layout.addLayout(shift_layout)
             shift_layout.addWidget(day_label,0,1)
             shift_layout.addWidget(morning_label,0,2)
             shift_layout.addWidget(evening_label,0,3)
             shift_layout.addWidget(night_label,0,4)
-
-
-    # Show window
     w.show()
-    sys.exit(a.exec_())
+    app.exec_()
 
 
 if __name__ == '__main__':
     main()
+
+
+
+

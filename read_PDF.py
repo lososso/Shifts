@@ -3,7 +3,7 @@ import xlrd
 
 
 def main(loc):
-    # Give the location of the file
+    # Give the location of the file+
     [numrows,numcolumns,sheet] = readExcel(loc)
     year_dict = getMonths(sheet,numcolumns)
     year_list = ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
@@ -12,7 +12,6 @@ def main(loc):
     for months in year_list:
         shifts = getShifts(year_dict,months,numrows,sheet)
         year_dict[months] = shifts
-    print year_dict
     return year_dict
 
 
@@ -106,6 +105,7 @@ def getShifts(year_dict,month,numrows,sheet):
             result = decodeUnicode(A)
             nightShifts.append(result)
     shifts = zip(monthday,morningShifts,eveningShifts,nightShifts)
+
     return shifts
 
 
