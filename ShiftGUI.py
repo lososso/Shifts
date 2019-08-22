@@ -14,6 +14,15 @@ def main():
 
     create_gui(year_list,calendar_dict)
 
+def setButtonColor(button,shift_type):
+    if shift_type == 'BL':
+        button.setStyleSheet("background-color: orange")
+    if shift_type == 'M':
+        button.setStyleSheet("background-color: green")
+    if shift_type == 'W':
+        button.setStyleSheet("background-color: cyan")
+    if shift_type == 'OFF':
+        button.setStyleSheet("background-color: yellow")
 
 def create_gui(year_list,calendar_dict):
     a = QApplication(sys.argv)
@@ -24,50 +33,34 @@ def create_gui(year_list,calendar_dict):
     # Set window title
     w.setWindowTitle("Shift Gui V0.1")
     for index, element in enumerate(year_list):
-        label = QLabel(element)
-        main_layout.addWidget(label, 0, (index))
+        group = QGroupBox(element)
+        group_layout = QGridLayout()
+        group.setLayout(group_layout)
+        main_layout.addWidget(group, 0, (index + 1))
         month = calendar_dict[element]
         for elements in month:
             day = elements[0]
+            if day > 9:
+                day_label = QLabel(str(day))
+            else:
+                day_label = QLabel('0' + str(day))
             morning = elements[1]
             evening = elements[2]
             night = elements[3]
             shift_layout = QGridLayout()
             morning_label = QPushButton(morning)
-            if morning == 'BL':
-                morning_label.setStyleSheet("background-color: orange")
-            if morning == 'M':
-                morning_label.setStyleSheet("background-color: green")
-            if morning == 'W':
-                morning_label.setStyleSheet("background-color: cyan")
-            if morning == 'OFF':
-                morning_label.setStyleSheet("background-color: yellow")
+            setButtonColor(morning_label,morning)
             evening_label = QPushButton(evening)
-            if evening == 'BL':
-                evening_label.setStyleSheet("background-color: orange")
-            if evening == 'M':
-                evening_label.setStyleSheet("background-color: green")
-            if evening == 'W':
-                evening_label.setStyleSheet("background-color: cyan")
-            if evening == 'OFF':
-                evening_label.setStyleSheet("background-color: yellow")
+            setButtonColor(evening_label,evening)
             night_label = QPushButton(night)
-            if night == 'BL':
-                night_label.setStyleSheet("background-color: orange")
-            if night == 'M':
-                night_label.setStyleSheet("background-color: green")
-            if night == 'W':
-                night_label.setStyleSheet("background-color: cyan")
-            if night == 'OFF':
-                night_label.setStyleSheet("background-color: yellow")
-            main_layout.addLayout(shift_layout,day,index)
-            shift_layout.addWidget(morning_label,0,1)
-            shift_layout.addWidget(evening_label,0,2)
-            shift_layout.addWidget(night_label,0,3)
+            setButtonColor(night_label,night)
+            group_layout.addLayout(shift_layout,day,index + 1)
+            shift_layout.addWidget(day_label,0,1)
+            shift_layout.addWidget(morning_label,0,2)
+            shift_layout.addWidget(evening_label,0,3)
+            shift_layout.addWidget(night_label,0,4)
 
-    for index in range (1,32):
-        label = QLabel(str(index))
-        main_layout.addWidget(label,index,0)
+
     # Show window
     w.show()
     sys.exit(a.exec_())
