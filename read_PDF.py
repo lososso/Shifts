@@ -1,6 +1,7 @@
 # Reading an excel file using Python
 import xlrd
 
+
 def main():
     # Give the location of the file
     loc = "Operation2020-convertido.xlsx"
@@ -12,7 +13,7 @@ def main():
     for months in year_list:
         shifts = getShifts(year_dict,months,numrows,sheet)
         year_dict[months] = shifts
-    print year_dict
+    return year_dict
 
 
 def decodeUnicode(data):
