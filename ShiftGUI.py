@@ -4,7 +4,10 @@ from PyQt4.QtGui import *
 
 
 def main():
-    calendar_dict = RPDF.main()
+    loc2020 = "Operation2020-convertido.xlsx"
+    loc2019 = "Operation2019-convertido.xlsx"
+    calendar_dict = RPDF.main(loc2019)
+
     #print calendar_dict
     year_list = ('January', 'February', 'March',
                  'April', 'May', 'June',
