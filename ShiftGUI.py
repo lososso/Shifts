@@ -1,19 +1,19 @@
-import read_PDF as RPDF
-import sys
+import read_PDF
 from PyQt5.QtWidgets import QApplication, QLabel, QGridLayout, QWidget, QGroupBox, QPushButton, QVBoxLayout
 
 
 def main():
     loc2020 = "Operation2020-convertido.xlsx"
     loc2019 = "Operation2019-convertido.xlsx"
-    calendar_dict = RPDF.main(loc2019)
+    calendar_dict = read_PDF.main(loc2019)
     year_list = ('January', 'February', 'March',
                  'April', 'May', 'June',
                  'July', 'August', 'September',
-                 'October', 'November','December')
-    create_gui(year_list,calendar_dict)
+                 'October', 'November', 'December')
+    create_gui(year_list, calendar_dict)
 
-def setButtonColor(button,shift_type):
+
+def set_button_color(button, shift_type):
     if shift_type == 'BL':
         button.setStyleSheet("background-color: orange")
     if shift_type == 'M':
@@ -24,7 +24,7 @@ def setButtonColor(button,shift_type):
         button.setStyleSheet("background-color: yellow")
 
 
-def create_gui( year_list,calendar_dict):
+def create_gui(year_list, calendar_dict):
     app = QApplication([])
     # The QWidget widget is the base class of all user interface objects in PyQt4.
     w = QWidget()
@@ -49,25 +49,19 @@ def create_gui( year_list,calendar_dict):
             night = elements[3]
             shift_layout = QGridLayout()
             morning_label = QPushButton(morning)
-            setButtonColor(morning_label,morning)
+            set_button_color(morning_label, morning)
             evening_label = QPushButton(evening)
-            setButtonColor(evening_label,evening)
+            set_button_color(evening_label, evening)
             night_label = QPushButton(night)
-            setButtonColor(night_label,night)
-            print (day, index)
-            value = index + 1
+            set_button_color(night_label, night)
             group_layout.addLayout(shift_layout)
-            shift_layout.addWidget(day_label,0,1)
-            shift_layout.addWidget(morning_label,0,2)
-            shift_layout.addWidget(evening_label,0,3)
-            shift_layout.addWidget(night_label,0,4)
+            shift_layout.addWidget(day_label, 0, 1)
+            shift_layout.addWidget(morning_label, 0, 2)
+            shift_layout.addWidget(evening_label, 0, 3)
+            shift_layout.addWidget(night_label, 0, 4)
     w.show()
     app.exec_()
 
 
 if __name__ == '__main__':
     main()
-
-
-
-
