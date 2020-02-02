@@ -1,6 +1,6 @@
 import read_PDF
 from PyQt5.QtWidgets import QApplication, QLabel, QGridLayout, QWidget, QGroupBox, QPushButton, QVBoxLayout
-
+from functools import partial
 
 def main():
     loc2020 = "Operation2020-convertido.xlsx"
